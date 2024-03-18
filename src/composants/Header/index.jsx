@@ -11,7 +11,7 @@ export default function Header() {
 
     return (
 
-        <div style={{ marginBottom: "20px", width: "100%", height: "50px", backgroundColor: 'blue', display: "flex", flexDirection: 'row', fontSize: "19px", fontWeight: 'bold', color: '#FFF', alignItems: 'center', justifyContent: 'space-between' }}>
+        <div style={{ marginBottom: "5px", width: "100%", height: "50px", backgroundColor: 'blue', display: "flex", flexDirection: 'row', fontSize: "19px", fontWeight: 'bold', color: '#FFF', alignItems: 'center', justifyContent: 'space-between' }}>
 
             <div style={{ display: 'flex', flexDirection: 'row' }}>
                 <span style={{ marginLeft: 10 }}>
