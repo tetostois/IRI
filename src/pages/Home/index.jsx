@@ -1,18 +1,20 @@
-import React, { useContext } from 'react'
-import Header from '../../composants/Header'
-import { AppContext } from '../../context';
+import React from 'react';
 
-export default function Home() {
-    const { language, setLanguage } = useContext(AppContext);
+//Bootstrap and jQuery libraries
+import 'bootstrap/dist/css/bootstrap.min.css';
+
+//import "antd/dist/antd.css";
+import Header from './../../composants/Header/index';
+import Hero from './Hero';
+
+const Home = () => {
     return (
-        <>
+        <div className='MainDiv'>
+            <Hero />
             <Header />
-            <div>Home</div>
-            <div>
-                <span>Langue :</span>
-                <span>{language}</span>
-            </div>
-        </>
-
+        </div>
     )
 }
+
+export default Home
+
