@@ -114,7 +114,7 @@ export const chapitrec = {
 
 const bloc1: bloc = {
     titre: "Le marketing digital", // Replace with your desired title
-    texte: "Le marketing digital est l'ensemble des techniques marketing mises en œuvre sur internet et les appareils mobiles. Il vise à atteindre des objectifs de notoriété, de trafic, de qualification de leads ou de ventes en ligne.", // Replace with your desired text content
+    texte: "Le marketing digital est l'ensemble des techniques marketing mises en œuvre sur internet et les appareils mobiles. Il vise à atteindre des objectifs de notoriété, de trafic.", // Replace with your desired text content
     listPoint: [
         "Amélioration de la visibilité en ligne",
         "Augmentation du trafic web",
@@ -139,7 +139,7 @@ const bloc1: bloc = {
         },
         {
             titre: "Le référencement naturel (SEO)",
-            texte: `Le référencement naturel, également appelé SEO (Search Engine Optimization), consiste à optimiser un site web pour qu'il apparaisse en bonne position dans les résultats de recherche organiques des moteurs de recherche comme Google. Un bon SEO permet d'améliorer la visibilité d'un site web et d'attirer du trafic qualifié.`,
+            texte: `Le référencement naturel, également appelé SEO (Search Engine Optimization), consiste à optimiser un site web pour qu'il apparaisse en bonne position.`,
             listPoint: [
                 "Optimisation du contenu textuel avec des mots clés pertinents",
                 "Optimisation technique du site web (vitesse de chargement, code propre)",
@@ -152,7 +152,7 @@ const bloc1: bloc = {
         },
         {
             titre: "Le marketing de contenu",
-            texte: `Le marketing de contenu consiste à créer et diffuser du contenu de valeur (articles de blog, vidéos, infographies, etc.) pour attirer et fidéliser un public cible et, à terme, atteindre des objectifs marketing. Le contenu doit être pertinent, informatif et engageant pour capter l'intérêt des lecteurs.`,
+            texte: `Le marketing de contenu consiste à créer et diffuser du contenu de valeur (articles de blog, vidéos, infographies, etc.) pour attirer et fidéliser un public.`,
             listPoint: [
                 "Identification des sujets qui intéressent votre audience",
                 "Création de contenu de qualité et régulier",
@@ -175,9 +175,7 @@ const bloc2: bloc = {
     1. **Définissez vos objectifs**: Commencez par identifier vos objectifs précis (notoriété, engagement, trafic, etc.). Cela vous permettra de choisir les plateformes les plus adaptées et de créer une stratégie cohérente.
     2. **Ciblez votre audience**: Identifiez votre public cible et adaptez votre contenu à ses besoins et ses intérêts. Utilisez des personas pour mieux comprendre les attentes de votre audience.
     3. **Créez du contenu engageant**: Publiez du contenu de qualité, varié et attractif (images, vidéos, articles, stories) qui suscite l'intérêt et incite à l'interaction.
-    4. **Interagissez avec votre communauté**: Répondez aux commentaires, questions et messages de vos followers. Favorisez l'échange et créez un lien durable avec votre audience.
-    5. **Analysez vos performances**: Mesurez l'impact de vos actions grâce aux outils d'analyse des réseaux sociaux. Identifiez ce qui fonctionne et adaptez votre stratégie en conséquence.
-  `,
+     `,
     listPoint: [
         "Définissez vos objectifs",
         "Ciblez votre audience",
@@ -203,25 +201,7 @@ const bloc2: bloc = {
         },
         {
             titre: "Le calendrier éditorial",
-            texte: "Planifiez vos publications à l'avance pour garantir une présence régulière et cohérente.Identifiez les réseaux sociaux les plus pertinents pour votre audience et vos objectifs.Identifiez les réseaux sociaux les plus pertinents pour votre audience et vos objectifs.",
-            listPoint: [],
-            urlVideo: "",
-            urlImage: "",
-            preanbule: "",
-            conclusion: "",
-        },
-        {
-            titre: "Les outils d'analyse",
-            texte: "Exploitez les outils d'analyse pour suivre vos performances et identifier les points d'amélioration.Identifiez les réseaux sociaux les plus pertinents pour votre audience et vos objectifs.Identifiez les réseaux sociaux les plus pertinents pour votre audience et vos objectifs.",
-            listPoint: [],
-            urlVideo: "",
-            urlImage: "",
-            preanbule: "",
-            conclusion: "",
-        },
-        {
-            titre: "Les formats de contenu",
-            texte: "Explorez les différents formats de contenu disponibles (vidéos courtes, stories interactives, etc.) pour varier votre communication.",
+            texte: "Planifiez vos publications à l'avance pour garantir une présence régulière et cohérente.Identifiez les réseaux sociaux les plus pertinents pour votre audience et vos objectifs.",
             listPoint: [],
             urlVideo: "",
             urlImage: "",
@@ -231,6 +211,77 @@ const bloc2: bloc = {
     ],
 };
 
+export const choixQcm1 = [
+    {
+        libelle: 'Quel style de leadership est le plus efficace pour une équipe autonome et expérimentée ?',
+        choix: [
+            {
+                id: 1,
+                texte: 'Leadership directif: Le leader donne des instructions précises et supervise étroitement le travail.',
+                isTrue: false,
+            },
+            {
+                id: 2,
+                texte: 'Leadership participatif: Le leader consulte l\'équipe et prend des décisions en collaboration.',
+                isTrue: true,
+            },
+            {
+                id: 3,
+                texte: 'Leadership délégatif: Le leader donne à l\'équipe une grande liberté et une grande responsabilité',
+                isTrue: false,
+            },
+            {
+                id: 4,
+                texte: 'Leadership situationnel: Le leader adapte son style en fonction de la situation et des besoins de l\'équipe.',
+                isTrue: false,
+            }
+        ],
+        valeursJustes: [2],
+    },
+
+    {
+        libelle: 'Laquelle des affirmations suivantes est la plus susceptible de démotiver un employé ?',
+        choix: [
+            {
+                id: 1,
+                texte: 'Manque de reconnaissance: Le travail de l\'employé n\'est jamais reconnu ou valorisé.',
+                isTrue: false,
+            },
+            {
+                id: 2,
+                texte: 'Absence de perspectives d\'évolution: L\'employé n\'a aucune possibilité de progresser dans sa carrière.',
+                isTrue: false,
+            },
+            {
+                id: 3,
+                texte: 'Mauvaises relations avec les collègues: L\'employé a des conflits ou des tensions avec ses collègues.',
+                isTrue: true,
+            }
+        ],
+        valeursJustes: [3],
+    },
+    {
+        libelle: 'Laquelle des techniques suivantes est la plus efficace pour améliorer la communication dans une équipe ?',
+        choix: [
+            {
+                id: 1,
+                texte: 'Organiser des réunions régulières: Permettre aux membres de l\'équipe de partager des informations et de discuter des problèmes.',
+                isTrue: true,
+            },
+            {
+                id: 2,
+                texte: 'Utiliser un canal de communication unique: Centraliser les communications pour éviter la confusion et les informations dispersées.',
+                isTrue: true,
+            },
+            {
+                id: 3,
+                texte: 'Encourager le feedback constructif: Favoriser une communication ouverte et honnête entre les membres de l\'équipe.',
+                isTrue: false,
+            }
+        ],
+        valeursJustes: [1, 2],
+    },
+]
 
 
 
@@ -250,7 +301,8 @@ export const chapitre: Chapitre = {
         "Analyser vos performances et optimiser votre présence",
     ],
     conclusion: `En maîtrisant les réseaux sociaux et en appliquant les conseils de ce chapitre, vous pouvez booster votre marketing digital et atteindre vos objectifs commerciaux.`,
-    blocs: [bloc1, bloc2]
+    blocs: [bloc1, bloc2],
+    qcms: choixQcm1,
 };
 
 

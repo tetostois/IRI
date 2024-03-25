@@ -29,6 +29,18 @@ const chapitrec = {
     ]
 }
 
+export interface Choix {
+    id: string;
+    texte: string;
+    isTrue?: boolean; // Propriété optionnelle pour indiquer si le choix est juste
+}
+
+export interface QCM {
+    libelle: string;
+    choix: Choix[];
+    valeursJustes: string[];
+}
+
 
 export interface sousBloc {
     titre: string;
@@ -63,6 +75,7 @@ export interface Chapitre {
     preanbule: string;
     objectifs: string[];
     blocs: bloc[];
+    qcms: Object[];
     conclusion: string;
 }
 

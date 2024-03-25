@@ -86,11 +86,11 @@ export default function Dashboard() {
 
 
 
-                <Row style={{ backgroundColor: "rgba(240,240,240,0.5)", borderRadius: 5, margin: 20, marginTop: 30, padding: 10 }}>
+                <Row style={{ backgroundColor: "rgba(36,172,242,0.3)", borderRadius: 5, margin: 20, marginTop: 30, padding: 10 }}>
                     <div style={{ fontWeight: 'bold', fontSize: 19, textAlign: 'center' }}>Module de formation</div>
 
                     {modules.map((module, index) => (
-                        <Col onClick={() => { navigation('/module/' + (module.idModule)) }} style={{ margin: 8, minHeight: '200px', backgroundColor: "#ddd", padding: 5, borderRadius: 5 }}>
+                        <Col onClick={() => { navigation('/module/' + (module.idModule)) }} style={{ margin: 8, minHeight: '200px', backgroundColor: "rgba(36,172,242,0.4)", padding: 5, borderRadius: 5 }}>
                             <div style={{ minWidth: '250px' }}>
                                 <div name='titre' style={{ minHeight: '40px', textAlign: 'center', display: 'flex', flexDirection: 'row', justifyContent: 'center', alignItems: 'center', fontWeight: "bold", fontSize: 18, color: 'red' }}>
                                     <span>{module.titre}</span>
@@ -124,7 +124,7 @@ export default function Dashboard() {
 
                 </Row>
 
-                <Row style={{ backgroundColor: "rgba(0,0,240,0.3)", borderRadius: 5, margin: 20, marginTop: 30, padding: 20 }}>
+                <Row style={{ backgroundColor: "rgba(36,172,242,0.3)", borderRadius: 5, margin: 20, marginTop: 30, padding: 20 }}>
 
                     <Col>
                         <div>
