@@ -5,6 +5,7 @@ import { Divider } from '@mui/material'
 //import { modules } from '../../utils/data'
 import { useNavigate } from 'react-router-dom'
 import { modules } from '../../utils/data/index.ts'
+import Footer from '../../composants/Footer/index.jsx'
 
 export default function Dashboard() {
     const navigation = useNavigate();
@@ -137,6 +138,8 @@ export default function Dashboard() {
                         </div>
                     </Col>
                 </Row>
+
+                <Footer />
             </Container>
 
         </>
