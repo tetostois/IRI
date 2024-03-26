@@ -6,6 +6,7 @@ import Course from './pages/Course';
 import Dashboard from './pages/Dashboard';
 import { AppContext } from './context';
 import Module from './pages/Module';
+import Apropos from './pages/Apropos';
 
 //const AppContext = createContext();
 
@@ -21,6 +22,7 @@ function App() {
           <Route path="/home" element={<Home />}></Route>
           <Route path="/course" element={<Course />}></Route>
           <Route path="/dashboard" element={<Dashboard />}></Route>
+          <Route path="/apropos" element={<Apropos />}></Route>
           <Route path="/module/:idModule" element={<Module />}></Route>
 
 
