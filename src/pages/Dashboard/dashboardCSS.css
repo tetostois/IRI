@@ -1,0 +1,36 @@
+.statItemDashbord {
+    height: 108px;
+    background-color: orange;
+    display: flex;
+    padding-left: 20px;
+    align-items: center;
+    border-radius: 3px;
+}
+
+.icnDashbord {
+    width: 60px;
+    height: 60px;
+    background-color: white;
+}
+
+.texteStatDashbord {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    margin-left: 10px;
+}
+
+.numberStatDashboard {
+    font-size: 24px;
+    font-weight: 400;
+    line-height: 32px;
+}
+
+.texteStatDashboard {
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 22px;
+    letter-spacing: -0.01em;
+}
+
+.imageCourDashboard {}

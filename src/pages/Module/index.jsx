@@ -6,6 +6,7 @@ import { chapitre, modules } from '../../utils/data/index.ts'
 import { isMobile } from 'react-device-detect';
 import ReactPlayer from 'react-player'
 import { Button, Checkbox, CircularProgress } from '@mui/material';
+import HeaderContent from '../../composants/HeaderContent/index.jsx';
 
 
 export default function Module({ chapitres }) {
@@ -20,6 +21,7 @@ export default function Module({ chapitres }) {
     return (
         <div style={{ height: '100vh' }}>
             <Header />
+            <HeaderContent />
             <div style={{ height: '100vh' }} >
                 <div name='nomModule' style={{ border: '2px solid gray', minHeight: 50, textAlign: 'center', }}>
                     <span style={{ fontSize: "18", fontWeight: 'bold', }}>Module: {module.titre}</span>

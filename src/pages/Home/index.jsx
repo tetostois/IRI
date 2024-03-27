@@ -7,6 +7,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Header from './../../composants/Header/index';
 import './homeCSS.css';
 import { Button } from '@mui/material';
+import { Link } from 'react-router-dom';
 
 const Home = () => {
     return (
@@ -22,7 +23,7 @@ const Home = () => {
                 </div>
                 <div className='divSoustexte' style={{ textAlign: isMobile ? 'center' : 'left' }}>
                     <span>
-                        <span style={{ fontWeight: '700' }}>Plus de 1000 cours </span> couvrant tous les domaines technologiques pour vous permettre d'apprendre et d'explorer de nouvelles opportunités. Apprenez auprès d'experts du secteur et décrochez le job de vos rêves. <span style={{ color: 'red' }}>En savoir plus...</span>
+                        <span style={{ fontWeight: '700' }}>Plus de 1000 cours </span> couvrant tous les domaines technologiques pour vous permettre d'apprendre et d'explorer de nouvelles opportunités. Apprenez auprès d'experts du secteur et décrochez le job de vos rêves.<Link to={'/apropos'} style={{ textDecorationLine: 'none', }}> <span style={{ color: 'red', }}>En savoir plus...</span></Link>
                     </span>
                 </div>
                 <div style={{ display: 'flex', flexDirection: 'row', gap: isMobile ? 5 : 25, flexWrap: 'wrap', justifyContent: isMobile ? 'space-evenly' : 'flex-start' }}>

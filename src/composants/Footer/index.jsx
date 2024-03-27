@@ -1,5 +1,6 @@
 import React from 'react'
 import './footerCSS.css';
+import { Link } from 'react-router-dom';
 function Footer() {
     return (
         <div className='mainDivFooter'>
@@ -22,8 +23,8 @@ function Footer() {
                 </div>
                 <div className='subContainDivFooter'>
                     <span className='sousTitreFooter' style={{ fontWeight: 'bold' }}>A propos</span>
-                    <span className='subItemContaindivFooter'>Qui somme nous...?</span>
-                    <span className='subItemContaindivFooter'>Nos objectif</span>
+                    <Link to={'/apropos'} style={{ textDecorationLine: 'none', }}><span className='subItemContaindivFooter'>Qui somme nous...?</span></Link>
+                    <Link to={'/apropos'} style={{ textDecorationLine: 'none', }}><span className='subItemContaindivFooter'>Nos objectif</span></Link>
 
                 </div>
                 <div className='subContainDivFooter'>

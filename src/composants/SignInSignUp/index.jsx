@@ -11,7 +11,7 @@ import Typography from '@mui/material/Typography';
 import './signInSignUpCSS.css';
 import { Box } from '@mui/material';
 
-const etoileSpanRed = <span style={{ color: 'red' }}> **</span>;
+const etoileSpanRed = <span style={{ color: 'red' }}> *</span>;
 
 
 export default function SignInSignUp({ signIn }) {
