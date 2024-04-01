@@ -3,6 +3,7 @@ import Header from '../../composants/Header'
 import './TransitionCSS.css';
 import Footer from '../../composants/Footer';
 import { Button, Col, Container, Row } from 'react-bootstrap';
+import ReactPlayer from 'react-player';
 
 const Transition = () => {
     return (
@@ -18,7 +19,7 @@ const Transition = () => {
                         <img src="images/hero.png" alt="Hero" style={{ width: '100%', maxWidth: '374px', height: 'auto', }} />
                     </div>
                 </div>
-                
+
             </div>
 
             <div >
@@ -26,24 +27,38 @@ const Transition = () => {
                     <Row>
                         <Col xs={12}>
                             <div className="apropos-titre">
-                                <h1 style={{ padding: '40px', textAlign: 'center' }}>Titre A Venir</h1>
+                                <h1 style={{ padding: '40px', textAlign: 'center' }}>Diriger vous vers votre tableau de bord</h1>
                             </div>
                         </Col>
                     </Row>
                     <Row>
                         <Col xs={12}>
                             <p style={{ fontSize: '18px', fontWeight: '400px', textAlign: 'center' }}>
-                                Bienvenue sur notre plateforme, où nous sommes passionnés par l'autonomisation des individus afin qu'ils maîtrisent le monde de la conception et du développement. Nous proposons un large éventail de cours en ligne conçus pour doter les apprenants des compétences et des connaissances nécessaires pour réussir dans le paysage numérique en constante évolution.
+                                Félicitations ! Vous vous êtes connecté avec succès.
+
+                                Cliquez sur le bouton Ci-dessous pour commencer à explorer nos modules de formations, valides les cours et obtener votre certification.
+
+                                Si vous avez besoin de plus d'information suivez la video.
                             </p>
                         </Col>
+
+                        <div style={{ display: 'flex' }} className="video-button-container">
+                            <ReactPlayer
+                                url="https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+
+
+                            />
+                            <div style={{ display: "flex", justifyContent: "center", marginLeft: '20%', paddingTop: '10%' }}>
+                                <a href="/dashboard" >
+                                    <Button variant="danger">Accéder au tableau de bord</Button>
+                                </a>
+                            </div>
+                        </div>
+
+
                     </Row>
-                    <div style={{ textAlign: 'center', padding: '20px' }}>
-                        <Button variant="danger">Commencer</Button>
-                    </div>
                 </Container>
             </div>
-
-
             <Footer />
         </>
     )
