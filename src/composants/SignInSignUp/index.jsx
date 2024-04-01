@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
@@ -9,16 +9,21 @@ import StepLabel from '@mui/material/StepLabel';
 import Typography from '@mui/material/Typography';
 
 import './signInSignUpCSS.css';
-import { Box } from '@mui/material';
+import { Alert, AlertTitle, Box, CircularProgress } from '@mui/material';
+import { useFetch } from '../../utils/hooks/FetchData';
+import { useNavigate } from 'react-router-dom';
+import { AppContext } from '../../context';
+import Cookies from 'js-cookie';
 
 const etoileSpanRed = <span style={{ color: 'red' }}> *</span>;
 
 
-export default function SignInSignUp({ signIn }) {
+export default function SignInSignUp({ signIn, variantButton, classButtom }) {
     const [isSignIn, setIsSignIn] = useState(signIn)
     const [open, setOpen] = useState(false);
     const [formSignIn, setFormSignIn] = useState({})
     const [formSignUp, setFormSignUp] = useState({})
+
 
     const handleClickOpen = () => {
         setOpen(true);
@@ -37,7 +42,7 @@ export default function SignInSignUp({ signIn }) {
 
     return (
         <>
-            <Button className='bouttonhead' variant='contained' onClick={handleClickOpen} color='error' >S'inscrire</Button>
+            <Button className={classButtom ? classButtom : 'bouttonhead'} variant={variantButton ? variantButton : 'contained'} onClick={handleClickOpen} color='error' >{!signIn ? 'S\'inscrire' : 'Se connecter'}</Button>
             <Dialog
                 fullWidth={true}
                 maxWidth='md'
@@ -64,9 +69,9 @@ export default function SignInSignUp({ signIn }) {
                     </div>
 
                     {isSignIn ?
-                        <SignIn setIsSignIn={setIsSignIn} setOpen={setOpen} handleClose={handleClose} toggleSignInSignUp={toggleSignInSignUp} />
+                        <SignIn formSignIn={formSignIn} setFormSignIn={setFormSignIn} setIsSignIn={setIsSignIn} setOpen={setOpen} handleClose={handleClose} toggleSignInSignUp={toggleSignInSignUp} />
                         :
-                        <SignUp setIsSignIn={setIsSignIn} setOpen={setOpen} handleClose={handleClose} toggleSignInSignUp={toggleSignInSignUp} />
+                        <SignUp formSignUp={formSignUp} setFormSignUp={setFormSignUp} setIsSignIn={setIsSignIn} setOpen={setOpen} handleClose={handleClose} toggleSignInSignUp={toggleSignInSignUp} />
                     }
 
 
@@ -80,9 +85,14 @@ export default function SignInSignUp({ signIn }) {
 
 
 const steps = ['Etape 1', 'Etape 2', 'Etape 3'];
-const SignUp = ({ setOpen, setIsSignIn, handleClose, toggleSignInSignUp }) => {
+const SignUp = ({ formSignUp, setFormSignUp, setOpen, setIsSignIn, handleClose, toggleSignInSignUp }) => {
     const [activeStep, setActiveStep] = React.useState(0);
     const [skipped, setSkipped] = React.useState(new Set());
+    const [save, setSave] = useState(false)
+    const [error, setError] = useState({
+        signUpError: null,
+        step: -1,
+    })
 
     const isStepOptional = (step) => {
         return step === -1;
@@ -126,6 +136,37 @@ const SignUp = ({ setOpen, setIsSignIn, handleClose, toggleSignInSignUp }) => {
         setActiveStep(0);
     };
 
+    const setNom = (event) => {
+        setFormSignUp((prevForm) => ({ ...prevForm, nom: event.target.value }))
+    }
+
+    const setPrenom = (event) => {
+        setFormSignUp((prevForm) => ({ ...prevForm, prenom: event.target.value }))
+    }
+
+    const setDateNaissance = (event) => {
+        setFormSignUp((prevForm) => ({ ...prevForm, dateNaissance: event.target.value }))
+    }
+
+    const setLieuNaissance = (event) => {
+        setFormSignUp((prevForm) => ({ ...prevForm, lieuNaissance: event.target.value }))
+    }
+
+    const setTelephone = (event) => {
+        setFormSignUp((prevForm) => ({ ...prevForm, telephone: event.target.value }))
+    }
+
+    const setEmail = (event) => {
+        setFormSignUp((prevForm) => ({ ...prevForm, email: event.target.value }))
+    }
+
+    const setChiffreAffaire = (event) => {
+        if (!isNaN(event.target.value) && event.target.value > 0) {
+            setFormSignUp((prevForm) => ({ ...prevForm, chiffreAffaire: event.target.value }))
+        }
+    }
+
+
     return (
         <>
             <div className='divFormulaire' style={{ display: 'flex', flexDirection: 'column', }}>
@@ -151,40 +192,65 @@ const SignUp = ({ setOpen, setIsSignIn, handleClose, toggleSignInSignUp }) => {
                 </div>
                 {activeStep === 0 &&
                     <fieldset>
+                        {error.step == 0 &&
+                            <span style={{ color: 'red', fontWeight: 700, fontSize: 17 }}>{error.signUpError}</span>
+                        }
                         <legend>Informations <span style={{ color: 'green' }}>Personnelles</span></legend>
                         <div name='nom_prenom' className='divChamp'>
                             <div className='subDivChamp'>
                                 <label className='labelSignIn'>Nom<span style={{ color: 'red' }}> *</span></label>
-                                <input className='inputSignIn' type='text' required placeholder='Entrez votre nom' />
+                                <input
+                                    className='inputSignIn'
+                                    type='text' maxLength={60}
+                                    required
+                                    placeholder='Entrez votre nom'
+                                    value={formSignUp.nom}
+                                    onChange={e => setNom(e)}
+                                />
                             </div>
                             <div className='subDivChamp maginLeft'>
                                 <label className='labelSignIn'>Prenom</label>
-                                <input className='inputSignIn' type='text' required placeholder='Entrez votre prenom' />
+                                <input className='inputSignIn' type='text' maxLength={60} required placeholder='Entrez votre prenom'
+                                    value={formSignUp.prenom}
+                                    onChange={e => setPrenom(e)}
+                                />
                             </div>
                         </div>
 
                         <div name='date_lieu_naissane' className='divChamp'>
                             <div className='subDivChamp'>
                                 <label className='labelSignIn'>Date de Naisance{etoileSpanRed}</label>
-                                <input className='inputSignIn' type='date' required placeholder='...' />
+                                <input className='inputSignIn' type='date' required placeholder='...'
+                                    value={formSignUp.dateNaissance}
+                                    onChange={e => setDateNaissance(e)}
+                                />
                             </div>
                             <div className='subDivChamp maginLeft'>
                                 <label className='labelSignIn'>Lieu de naissance{etoileSpanRed}</label>
-                                <input className='inputSignIn' type='text' required placeholder='...' />
+                                <input className='inputSignIn' type='text' maxLength={60} required placeholder='...'
+                                    value={formSignUp.lieuNaissance}
+                                    onChange={e => setLieuNaissance(e)}
+                                />
                             </div>
                         </div>
 
                         <div name='date_lieu_naissane' className='divChamp'>
                             <div className='subDivChamp'>
                                 <label className='labelSignIn'>Telephone{etoileSpanRed}</label>
-                                <input className='inputSignIn' type='text' required placeholder='...' />
+                                <input className='inputSignIn' type='text' maxLength={60} required placeholder='...'
+                                    value={formSignUp.telephone}
+                                    onChange={e => setTelephone(e)}
+                                />
                             </div>
                         </div>
 
                         <div name='date_lieu_naissane' className='divChamp'>
                             <div className='subDivChamp'>
                                 <label className='labelSignIn'>Email{etoileSpanRed}</label>
-                                <input className='inputSignIn' type='text' required placeholder='...' />
+                                <input className='inputSignIn' type='text' maxLength={60} required placeholder='...'
+                                    value={formSignUp.email}
+                                    onChange={e => setEmail(e)}
+                                />
                             </div>
                         </div>
                     </fieldset>
@@ -192,31 +258,48 @@ const SignUp = ({ setOpen, setIsSignIn, handleClose, toggleSignInSignUp }) => {
                 {activeStep === 1 &&
                     <fieldset>
                         <legend>Informations <span style={{ color: 'blue' }}>Professionels</span></legend>
+
+                        {error.step == 1 &&
+                            <span style={{ color: 'red', fontWeight: 700, fontSize: 17 }}>{error.signUpError}</span>
+                        }
+
                         <div name='non_profession' className='divChamp'>
                             <div className='subDivChamp'>
                                 <label className='labelSignIn'>Profession<span style={{ color: 'red' }}> *</span></label>
-                                <input className='inputSignIn' type='text' required placeholder='Entrez votre Profession' />
+                                <input className='inputSignIn' type='text' maxLength={60} required placeholder='Entrez votre Profession'
+                                    value={formSignUp.profession}
+                                    onChange={event => setFormSignUp((prevForm) => ({ ...prevForm, profession: event.target.value }))}
+                                />
                             </div>
                         </div>
 
                         <div name='nonEntreprise' className='divChamp'>
                             <div className='subDivChamp'>
                                 <label className='labelSignIn'>Nom de l'entreprise </label>
-                                <input className='inputSignIn' type='text' required placeholder='...' />
+                                <input className='inputSignIn' type='text' maxLength={60} required placeholder='...'
+                                    value={formSignUp.nomEntreprise}
+                                    onChange={event => setFormSignUp((prevForm) => ({ ...prevForm, nomEntreprise: event.target.value }))}
+                                />
                             </div>
                         </div>
 
                         <div name='Chiffre_affaire' className='divChamp'>
                             <div className='subDivChamp'>
                                 <label className='labelSignIn'>Chiffre d'affaire </label>
-                                <input className='inputSignIn' type='text' required placeholder='...' />
+                                <input className='inputSignIn' type='text' maxLength={60} required placeholder='...'
+                                    value={formSignUp.chiffreAffaire}
+                                    onChange={event => setChiffreAffaire(event)}
+                                />
                             </div>
                         </div>
 
                         <div name='Region' className='divChamp'>
                             <div className='subDivChamp'>
                                 <label className='labelSignIn'>Region de residence </label>
-                                <input className='inputSignIn' type='text' required placeholder='...' />
+                                <input className='inputSignIn' type='text' maxLength={60} required placeholder='...'
+                                    value={formSignUp.region}
+                                    onChange={event => setFormSignUp((prevForm) => ({ ...prevForm, region: event.target.value }))}
+                                />
                             </div>
                         </div>
 
@@ -226,32 +309,57 @@ const SignUp = ({ setOpen, setIsSignIn, handleClose, toggleSignInSignUp }) => {
                 {activeStep === 2 &&
                     <fieldset>
                         <legend>Informations de <span style={{ color: 'red', fontWeight: 'bold' }}> Connexion</span></legend>
+                        {error.step == 2 &&
+                            <span style={{ color: 'red', fontWeight: 700, fontSize: 17 }}>{error.signUpError}</span>
+                        }
                         <div name='password' className='divChamp'>
                             <div className='subDivChamp'>
                                 <label className='labelSignIn'>Mot de passse </label>
-                                <input className='inputSignIn' type='password' required placeholder='' />
+                                <input maxLength={50} className='inputSignIn' type='password' required placeholder=''
+                                    value={formSignUp.password}
+                                    onChange={event => setFormSignUp((prevForm) => ({ ...prevForm, password: event.target.value }))}
+                                />
                             </div>
                         </div>
 
                         <div name='confirmPassword' className='divChamp'>
                             <div className='subDivChamp'>
                                 <label className='labelSignIn'>Confirmer le mot de passse </label>
-                                <input className='inputSignIn' type='password' required placeholder='' />
+                                <input maxLength={50} className='inputSignIn' type='password' required placeholder=''
+                                    value={formSignUp.confirmPassword}
+                                    onChange={event => setFormSignUp((prevForm) => ({ ...prevForm, confirmPassword: event.target.value }))}
+                                />
                             </div>
                         </div>
 
                     </fieldset>
                 }
 
+                {activeStep === 3 &&
+                    <fieldset>
+                        <legend>Enregistrement <span style={{ color: 'green', fontWeight: 'bold' }}> ...</span></legend>
+                        <ValidationSingInSignUp formSignUp={formSignUp} setActiveStep={setActiveStep} setError={setError} />
+                    </fieldset>
+                }
+
                 <div className='divContainButton'>
-                    <Button color='error' variant='contained' onClick={handleClose} >Annuler</Button>
+                    <Button color='error' variant='contained' onClick={handleClose} disabled={activeStep === 3}  >Annuler</Button>
                     <div style={{ display: 'flex', gap: 10 }}>
-                        <Button variant='outlined' onClick={handleBack} disabled={activeStep === 0}>
+                        <Button variant='outlined' onClick={handleBack} disabled={activeStep === 0 || activeStep === 3}>
                             Precedant
                         </Button>
-                        <Button variant='contained' onClick={handleNext}  >
+                        {(activeStep >= steps.length - 1) ?
+                            <Button variant='contained' onClick={() => { setActiveStep(3) }} >
+                                Enregister
+                            </Button>
+                            :
+                            <Button variant='contained' onClick={handleNext}  >
+                                Suivant
+                            </Button>
+                        }
+                        {/* <Button variant='contained' onClick={handleNext}  >
                             {activeStep === steps.length - 1 ? 'Enregister' : 'Suivant'}
-                        </Button>
+                        </Button> */}
                     </div>
 
                 </div>
@@ -264,7 +372,12 @@ const SignUp = ({ setOpen, setIsSignIn, handleClose, toggleSignInSignUp }) => {
 }
 
 
-const SignIn = ({ setOpen, setIsSignIn, handleClose, toggleSignInSignUp }) => {
+const SignIn = ({ formSignIn, setFormSignIn, setOpen, setIsSignIn, handleClose, toggleSignInSignUp, }) => {
+    const [save, setSave] = useState(false)
+    const [error, setError] = useState({
+        signInError: null,
+        step: -1,
+    })
     return (
         <>
             <div className='divFormulaire' style={{ display: 'flex', flexDirection: 'column', }}>
@@ -274,26 +387,40 @@ const SignIn = ({ setOpen, setIsSignIn, handleClose, toggleSignInSignUp }) => {
 
                 <fieldset>
                     <legend>Informations de <span style={{ color: 'red', fontWeight: 'bold' }}> Connexion</span></legend>
+                    {error.signInError &&
+                        <span style={{ color: 'red', fontWeight: 700, fontSize: 17 }}>{error.signInError}</span>
+                    }
+
                     <div name='password' className='divChamp'>
                         <div className='subDivChamp'>
                             <label className='labelSignIn'>Telephone où Email </label>
-                            <input name='email  telephone' className='inputSignIn' type='text' required placeholder='' />
+                            <input maxLength={50} name='email  telephone' className='inputSignIn' type='text' required placeholder=''
+                                value={formSignIn.emailOrPhone}
+                                onChange={event => setFormSignIn((prevForm) => ({ ...prevForm, login: event.target.value }))}
+                            />
                         </div>
                     </div>
 
                     <div name='confirmPassword' className='divChamp'>
                         <div className='subDivChamp'>
                             <label className='labelSignIn'>Mot de passse </label>
-                            <input className='inputSignIn' type='password' required placeholder='' />
+                            <input maxLength={50} className='inputSignIn' type='password' required placeholder=''
+                                value={formSignIn.password}
+                                onChange={event => setFormSignIn((prevForm) => ({ ...prevForm, password: event.target.value }))}
+                            />
                         </div>
                     </div>
+
+                    {save &&
+                        <ValidationSingInSignUp formSignIn={formSignIn} setSave={setSave} isSignIn={true} setError={setError} />
+                    }
 
                 </fieldset>
 
                 <div className='divContainButton'>
                     <Button color='error' variant='contained' onClick={handleClose} >Annuler</Button>
                     <div style={{ display: 'flex', gap: 10 }}>
-                        <Button variant='contained'>
+                        <Button variant='contained' onClick={() => setSave(true)} disabled={save}>
                             Connexion
                         </Button>
                     </div>
@@ -305,4 +432,59 @@ const SignIn = ({ setOpen, setIsSignIn, handleClose, toggleSignInSignUp }) => {
             </div>
         </>
     )
+}
+
+
+
+const ValidationSingInSignUp = ({ isSignIn, formSignIn, formSignUp, setActiveStep, setError, setSave }) => {
+    const { isOnline, language, setUser } = useContext(AppContext);
+    const { isLoading, data, error } = useFetch(((isSignIn ? "/login/" : "/etudiant/enregistrement/")), 'POST', isSignIn ? formSignIn : formSignUp)
+    const navigation = useNavigate();
+
+
+    if (isLoading) {
+        return (
+            <div style={{ marginLeft: '40%', marginBottom: '40%' }} >
+                <CircularProgress size={70} />
+            </div>
+        )
+    } else if (error) {
+        if (isOnline) {
+            return (
+                <div style={{ width: '100%', marginBottom: '5px', }}>
+                    <Alert severity="error">
+                        <AlertTitle>Erreur</AlertTitle>
+                        <span>{language == 'FR' ? "Probleme avec le serveur...!" : "Problem with the server...!"}</span>
+                    </Alert>
+                </div>
+            )
+        } else {
+            return (
+                <div style={{ width: '100%', marginBottom: '5px', }}>
+                    <Alert severity="error">
+                        <AlertTitle>Erreur</AlertTitle>
+                        <span>{language == 'FR' ? "Vous êtes hors connexion, controler votre connexion internet" : "You are offline, check your internet connection"}</span>
+                    </Alert>
+                </div>
+            )
+        }
+    } else if (!isLoading && !error) {
+        if (data.errorAPI) {
+            //console.log('errorAPI === ', data.errorAPI)
+            if (!isSignIn) {
+                setError((prevError) => ({ ...prevError, step: data.index, signUpError: data.message }))
+                setActiveStep(data.index)
+            } else {
+                setError((prevError) => ({ ...prevError, signInError: data.message }))
+                setSave(false)
+            }
+        } else {
+            //console.log("user connect == ", data)
+            Cookies.set("user", data);
+            setUser(data)
+            //console.log("cookie save == ", Cookies.get('user'))
+            navigation('/dashboard')
+
+        }
+    }
 }

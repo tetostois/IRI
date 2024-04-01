@@ -1,9 +1,9 @@
-import { useState, useEffect, useContext } from 'react';
-import { ServeurContext } from '../../../App';
+import { useState, useEffect } from 'react';
+//import { ServeurContext } from '../../../App';
 
 
 export function useFetch(url, method, body, param, update, isMultipart) {
-    const serveur = useContext(ServeurContext);
+    const serveur = "http://localhost:9006/elearningapi";
     const [data, setData] = useState({});
     const [isLoading, setLoading] = useState(true);
     const [error, setError] = useState(false);
@@ -18,6 +18,13 @@ export function useFetch(url, method, body, param, update, isMultipart) {
         var myHeaders = new Headers();
         myHeaders.append("Content-Type", isMultipart ? "multipart/form-data" : "application/json");
         myHeaders.append("Connection", "Keep-alive");
+
+
+        const username = "admin";
+        const password = "passwordadmin237";
+        const base64Credentials = btoa(username + ":" + password); // Encode en base64
+
+        myHeaders.append("Authorization", "Basic " + base64Credentials);
 
         let formData = new FormData();
 

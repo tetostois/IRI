@@ -7,7 +7,7 @@ import { Button } from '@mui/material';
 import SignInSignUp from '../SignInSignUp';
 
 export default function Header() {
-    const { language, setLanguage } = useContext(AppContext);
+    const { language, setLanguage, setUser, user } = useContext(AppContext);
     const [showSignInsignOn, setShowSignInsignOn] = useState(false)
     const handleLanguageChange = (event) => {
         setLanguage(event.target.value);
@@ -35,15 +35,21 @@ export default function Header() {
                 }
             </div>
             <div style={{ marginRight: 20, zIndex: 2, display: 'flex', flexDirection: 'row', alignItems: 'center', gap: 5 }}>
+                {user ?
+                    <div className='buttonAction'>
+                        <Button variant='outlined' color='error' onClick={() => { setUser(null) }} >Deconnexion</Button>
+                    </div>
+                    :
+                    <SignInSignUp signIn={false} />
 
-                <SignInSignUp signIn={false} />
+                }
                 <select
                     id="language-select"
                     value={language}
                     onChange={handleLanguageChange}
                 >
                     <option value="EN">{isMobile ? 'EN' : 'English'}</option>
-                    <option value="FR">{isMobile ? 'EN' : 'Français'}</option>
+                    <option value="FR">{isMobile ? 'FR' : 'Français'}</option>
                 </select>
             </div>
         </div>

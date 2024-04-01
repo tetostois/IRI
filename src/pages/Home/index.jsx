@@ -8,6 +8,7 @@ import Header from './../../composants/Header/index';
 import './homeCSS.css';
 import { Button } from '@mui/material';
 import { Link } from 'react-router-dom';
+import SignInSignUp from '../../composants/SignInSignUp';
 
 const Home = () => {
     return (
@@ -27,8 +28,10 @@ const Home = () => {
                     </span>
                 </div>
                 <div style={{ display: 'flex', flexDirection: 'row', gap: isMobile ? 5 : 25, flexWrap: 'wrap', justifyContent: isMobile ? 'space-evenly' : 'flex-start' }}>
-                    <Button className='boutton01' variant='contained' color='error'>S'inscrire</Button>
-                    <Button className='boutton01' variant='outlined' color='error'>Se connecter</Button>
+                    <SignInSignUp signIn={true} classButtom='boutton01' variantButton='contained' />
+                    <SignInSignUp signIn={false} classButtom='boutton01' variantButton='outlined' />
+                    {/*<Button className='boutton01' variant='contained' color='error'>S'inscrire</Button>
+                    <Button className='boutton01' variant='outlined' color='error'>Se connecter</Button>*/}
                 </div>
                 <div style={{ display: 'flex', flexDirection: 'row', gap: 50, rowGap: 5, flexWrap: 'wrap', }}>
                     <div style={{ display: 'flex', flexDirection: 'column', flexWrap: 'wrap', fontWeight: '700', }}>

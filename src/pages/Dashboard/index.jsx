@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import Header from '../../composants/Header'
 import { Col, Container, Row } from 'react-bootstrap'
 import { Button, Divider } from '@mui/material'
@@ -8,9 +8,11 @@ import { modules } from '../../utils/data/index.ts'
 import Footer from '../../composants/Footer/index.jsx'
 import HeaderContent from '../../composants/HeaderContent/index.jsx'
 import './dashboardCSS.css';
+import { AppContext } from '../../context/index.jsx'
 
 
 export default function Dashboard() {
+    const { isOnline, language, setUser, user } = useContext(AppContext);
     const navigation = useNavigate();
     return (
         <>
@@ -81,17 +83,13 @@ export default function Dashboard() {
 
                 </div> */}
 
-
-
                 <div style={{ marginTop: 10, textAlign: "center", fontWeight: 'bold' }}>
                     Explorez nos Modules de Formation: Plongez dans notre programme de formation complet! Découvrez des modules spécialement conçus pour vous aider à maîtriser les compétences essentielles en matière de rentabilité et de fonctionnement. Que vous soyez un novice ou un entrepreneur chevronné, ces modules vous guideront vers le succès.
                 </div>
 
-
-
                 <Row style={{ borderRadius: 5, margin: 20, marginTop: 30, padding: 10 }}>
                     <div style={{ margin: '5px', fontWeight: 'blod', }}>Tableau de bord</div>
-                    <Col>
+                    <Col style={{ margin: 10 }}>
                         <div className='statItemDashbord' style={{ backgroundColor: '#FFEEE8' }}>
                             <div className='icnDashbord'></div>
                             <div className='texteStatDashbord'>
@@ -100,7 +98,7 @@ export default function Dashboard() {
                             </div>
                         </div>
                     </Col>
-                    <Col>
+                    <Col style={{ margin: 10 }}>
                         <div className='statItemDashbord' style={{ backgroundColor: '#EBEBFF' }}>
                             <div className='icnDashbord'></div>
                             <div className='texteStatDashbord'>
@@ -109,7 +107,7 @@ export default function Dashboard() {
                             </div>
                         </div>
                     </Col>
-                    <Col>
+                    <Col style={{ margin: 10 }}>
                         <div className='statItemDashbord' style={{ backgroundColor: '#E1F7E3' }}>
                             <div className='icnDashbord'></div>
                             <div className='texteStatDashbord'>
@@ -118,7 +116,7 @@ export default function Dashboard() {
                             </div>
                         </div>
                     </Col>
-                    <Col>
+                    <Col style={{ margin: 10 }}>
                         <div className='statItemDashbord' style={{ backgroundColor: '#FFEEE8' }}>
                             <div className='icnDashbord'></div>
                             <div className='texteStatDashbord'>
@@ -133,7 +131,7 @@ export default function Dashboard() {
                 <Row style={{ borderRadius: 5, margin: 20, marginTop: 30, padding: 10 }}>
                     {modules.map((module, index) => (
                         <Col style={{ margin: 8, minHeight: '200px', backgroundColor: "white", padding: 5, borderRadius: 5, boxShadow: '0 0 5px rgba(0, 0, 0, 0.5)' }}>
-                            <div style={{ minWidth: '250px' }}>
+                            <div style={{ minWidth: '250px', height: '100%', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
                                 <div className='imageCourDashboard'>
                                     <img className='imageLogoFooter' src='/images/lecteurcour.png' />
                                 </div>
@@ -151,18 +149,20 @@ export default function Dashboard() {
                                         </div>
                                     ))}
                                 </div>
-                                <Divider style={{ marginTop: 10, marginBottom: 10 }} />
-                                <div name='nombreChapitre' style={{ textAlign: 'center' }}>
-                                    <span><spam>{module.nombreChapitre}</spam> Chapitres</span>
-                                </div>
-                                <Divider style={{ marginTop: 10, marginBottom: 10 }} />
-                                <div name='accessible' style={{ textAlign: 'center', height: '90px' }}>
-                                    {module.isOk ?
-                                        <Button onClick={() => { navigation('/module/' + (module.idModule)) }} variant='contained' color='success' sx={{ width: '100%', height: '100%', borderRadius: 0 }} >Commener avec ce module</Button>
-                                        :
-                                        <Button variant='contained' color='error' sx={{ width: '100%', height: '100%' }} >Module Verrouiller</Button>
+                                <div>
+                                    <Divider style={{ marginTop: 10, marginBottom: 10 }} />
+                                    <div name='nombreChapitre' style={{ textAlign: 'center' }}>
+                                        <span><spam>{module.nombreChapitre}</spam> Chapitres</span>
+                                    </div>
+                                    <Divider style={{ marginTop: 10, marginBottom: 10 }} />
+                                    <div name='accessible' style={{ textAlign: 'center', height: '90px' }}>
+                                        {module.isOk ?
+                                            <Button onClick={() => { navigation('/module/' + (module.idModule)) }} variant='contained' color='success' sx={{ width: '100%', height: '100%', borderRadius: 0 }} >Commener avec ce module</Button>
+                                            :
+                                            <Button variant='contained' color='error' sx={{ width: '100%', height: '100%' }} >Module Verrouiller</Button>
 
-                                    }
+                                        }
+                                    </div>
                                 </div>
                             </div>
                         </Col>
