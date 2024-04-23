@@ -1,0 +1,75 @@
+.containeur {
+  font-size: 24px; /* Taille de police personnalisée */
+  color: #0074d9; /* Couleur du texte (bleu) */
+  font-weight: bold; /* Gras */
+  text-align: center; /* Alignement au centre */
+  padding-top: 10px;
+}
+
+.question-page {
+  font-family: sans-serif;
+  margin: 20px;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  text-align: center;
+}
+
+/* .question {
+  font-size: 15px;
+  color: red;
+} */
+
+.question-container {
+  margin-bottom: 100px;
+}
+
+.texte {
+  font-size: 20px;
+}
+
+h1,
+h2 {
+  margin: 0;
+  padding: 0;
+  font-size: 30px;
+}
+
+.time-remaining {
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.start-button,
+.submit-button {
+  background-color: #4caf50;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+.submit-button {
+}
+
+.start-button:hover,
+.submit-button:hover {
+  opacity: 0.8;
+}
+
+.answer-field {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  resize: vertical;
+  margin-top: 10px;
+}
+
+@media only screen and (max-width: 768px) {
+  .question-page {
+    width: 100%;
+  }
+}

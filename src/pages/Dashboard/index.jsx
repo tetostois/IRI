@@ -1,5 +1,4 @@
 import React, { useContext } from 'react'
-import Header from '../../composants/Header'
 import { Col, Container, Row } from 'react-bootstrap'
 import { Button, Divider } from '@mui/material'
 //import { modules } from '../../utils/data'
@@ -9,16 +8,27 @@ import Footer from '../../composants/Footer/index.jsx'
 import HeaderContent from '../../composants/HeaderContent/index.jsx'
 import './dashboardCSS.css';
 import { AppContext } from '../../context/index.jsx'
+import Head from '../../composants/Head/index.jsx'
 
 
 export default function Dashboard() {
     const { isOnline, language, setUser, user } = useContext(AppContext);
     const navigation = useNavigate();
+    const navigationData = [
+        // Replace with your links
+        { title: 'Partie 1 : Leadership', link: '/Transition' },
+        { title: 'Partie 2: Entreprenariat', link: '/Transition' },
+        { title: 'Partie 3: Compétence Professionnelle', link: '/Transition' },
+    ];
+
+    const navigate = useNavigate(); // Use useNavigate to handle navigation
+
+
     return (
         <>
 
             <Container fluid style={{ width: '100vw', margin: 0, padding: 0 }} >
-                <Header />
+                <Head />
                 <HeaderContent />
                 {/* <div
                     style={{
@@ -84,17 +94,36 @@ export default function Dashboard() {
                 </div> */}
 
                 <div style={{ marginTop: 10, textAlign: "center", fontWeight: 'bold' }}>
-                    Explorez nos Modules de Formation: Plongez dans notre programme de formation complet! Découvrez des modules spécialement conçus pour vous aider à maîtriser les compétences essentielles en matière de rentabilité et de fonctionnement. Que vous soyez un novice ou un entrepreneur chevronné, ces modules vous guideront vers le succès.
                 </div>
 
-                <Row style={{ borderRadius: 5, margin: 20, marginTop: 30, padding: 10 }}>
+
+
+                <Row style={{ backgroundColor: "rgba(36,172,242,0.3)", borderRadius: 5, margin: 20, marginTop: 30, padding: 20 }}>
+
+                    <Col>
+                        <div>
+                            <div style={{ fontWeight: 'bold', fontSize: 17 }}>Fonctionement du test de question a réponse ouvertes:</div>
+                            <p className='test'>Ce test en ligne à réponses ouvertes est composé de 8 questions réparties en 3 parties.</p>
+                            <ol>
+                                <ul style={{ margin: 5 }}><span style={{ fontWeight: 'bold' }}>Partie1: Leadership:</span></ul>
+                                <ul style={{ margin: 5 }}><span style={{ fontWeight: 'bold' }}>Partie2: Entreprenariat:</span> Les modules ne sont pas tous accessibles simultanément. Au début, seul le premier module est déverrouillé. Chaque semaine, un nouveau module sera accessible. Cette approche progressive vous permettra de suivre la formation de manière structurée et d’assimiler les informations étape par étape</ul>
+                                <ul style={{ margin: 5 }}><span style={{ fontWeight: 'bold' }}>Partie2: Compétence Professionnelle:</span> À la fin de la formation, si vous avez complété tous les chapitres et réussi les quiz, vous recevrez une attestation qui témoigne de votre engagement et de vos compétences nouvellement acquises.</ul>
+                            </ol>
+                        </div>
+                    </Col>
+                </Row>
+
+
+
+
+                {/* <Row style={{ borderRadius: 5, margin: 20, marginTop: 30, padding: 10 }}>
                     <div style={{ margin: '5px', fontWeight: 'blod', }}>Tableau de bord</div>
                     <Col style={{ margin: 10 }}>
                         <div className='statItemDashbord' style={{ backgroundColor: '#FFEEE8' }}>
                             <div className='icnDashbord'></div>
                             <div className='texteStatDashbord'>
-                                <span className='numberStatDashboard'>10</span>
-                                <span className='texteStatDashboard'>Cour deja lu</span>
+                                <span className='numberStatDashboard'>Partie1 LeaderShip</span>
+                                <span className='texteStatDashboard'>80 Questions</span>
                             </div>
                         </div>
                     </Col>
@@ -102,8 +131,8 @@ export default function Dashboard() {
                         <div className='statItemDashbord' style={{ backgroundColor: '#EBEBFF' }}>
                             <div className='icnDashbord'></div>
                             <div className='texteStatDashbord'>
-                                <span className='numberStatDashboard'>30</span>
-                                <span className='texteStatDashboard'>QCM Validés</span>
+                                <span className='numberStatDashboard'>Partie2: Entreprenariat</span>
+                                <span className='texteStatDashboard'>80 Questions</span>
                             </div>
                         </div>
                     </Col>
@@ -111,115 +140,36 @@ export default function Dashboard() {
                         <div className='statItemDashbord' style={{ backgroundColor: '#E1F7E3' }}>
                             <div className='icnDashbord'></div>
                             <div className='texteStatDashbord'>
-                                <span className='numberStatDashboard'>1</span>
-                                <span className='texteStatDashboard'>Module accessible</span>
+                                <span className='numberStatDashboard'>Partie3: : Compétence Professionnelle</span>
+                                <span className='texteStatDashboard'>80 Questions</span>
                             </div>
                         </div>
                     </Col>
-                    <Col style={{ margin: 10 }}>
-                        <div className='statItemDashbord' style={{ backgroundColor: '#FFEEE8' }}>
-                            <div className='icnDashbord'></div>
-                            <div className='texteStatDashbord'>
-                                <span className='numberStatDashboard'>25</span>
-                                <span className='texteStatDashboard'>Cour deja lu</span>
-                            </div>
-                        </div>
-                    </Col>
-                </Row>
-
-
-                <Row style={{ borderRadius: 5, margin: 20, marginTop: 30, padding: 10 }}>
-                    {modules.map((module, index) => (
-                        <Col style={{ margin: 8, minHeight: '200px', backgroundColor: "white", padding: 5, borderRadius: 5, boxShadow: '0 0 5px rgba(0, 0, 0, 0.5)' }}>
-                            <div style={{ minWidth: '250px', height: '100%', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
-                                <div className='imageCourDashboard'>
-                                    <img className='imageLogoFooter' src='/images/lecteurcour.png' />
-                                </div>
-                                <div name='titre' style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: 50, textAlign: 'center' }}>
-                                    <span style={{ fontWeight: '600' }}>{module.titre}</span>
-                                </div>
-                                <Divider style={{ marginTop: 10, marginBottom: 10 }} />
-                                <div name='description' style={{ padding: 5, }}>
-                                    {module.description.map((point, index01) => (
-                                        <div style={{ marginBottom: 10 }}>
-                                            <span>
-                                                <span style={{ fontWeight: "bold", fontStyle: "italic" }}>{point.titre ? point.titre + ' :' : ''}</span>
-                                                {point.texte}
-                                            </span>
-                                        </div>
-                                    ))}
-                                </div>
-                                <div>
-                                    <Divider style={{ marginTop: 10, marginBottom: 10 }} />
-                                    <div name='nombreChapitre' style={{ textAlign: 'center' }}>
-                                        <span><spam>{module.nombreChapitre}</spam> Chapitres</span>
-                                    </div>
-                                    <Divider style={{ marginTop: 10, marginBottom: 10 }} />
-                                    <div name='accessible' style={{ textAlign: 'center', height: '90px' }}>
-                                        {module.isOk ?
-                                            <Button onClick={() => { navigation('/module/' + (module.idModule)) }} variant='contained' color='success' sx={{ width: '100%', height: '100%', borderRadius: 0 }} >Commener avec ce module</Button>
-                                            :
-                                            <Button variant='contained' color='error' sx={{ width: '100%', height: '100%' }} >Module Verrouiller</Button>
-
-                                        }
-                                    </div>
-                                </div>
-                            </div>
-                        </Col>
-                    ))}
-                </Row>
-
-                {/* <Row style={{ borderRadius: 5, margin: 20, marginTop: 30, padding: 10 }}>
-                    <div style={{ fontWeight: 'bold', fontSize: 19, textAlign: 'center' }}>Module de formation</div>
-
-                    {modules.map((module, index) => (
-                        <Col onClick={() => { navigation('/module/' + (module.idModule)) }} style={{ margin: 8, minHeight: '200px', backgroundColor: "rgba(36,172,242,0.4)", padding: 5, borderRadius: 5 }}>
-                            <div style={{ minWidth: '250px' }}>
-                                <div name='titre' style={{ minHeight: '40px', textAlign: 'center', display: 'flex', flexDirection: 'row', justifyContent: 'center', alignItems: 'center', fontWeight: "bold", fontSize: 18, color: 'red' }}>
-                                    <span>{module.titre}</span>
-                                </div>
-                                <Divider style={{ marginTop: 10, marginBottom: 10 }} />
-                                <div name='description'>
-                                    {module.description.map((point, index01) => (
-                                        <div style={{ marginBottom: 10 }}>
-                                            <span>
-                                                <span style={{ fontWeight: "bold", fontStyle: "italic" }}>{point.titre ? point.titre + ' :' : ''}</span>
-                                                {point.texte}
-                                            </span>
-                                        </div>
-                                    ))}
-                                </div>
-                                <Divider style={{ marginTop: 10, marginBottom: 10 }} />
-                                <div name='nombreChapitre' style={{ textAlign: 'center' }}>
-                                    <span><spam>{module.nombreChapitre}</spam> Chapitres</span>
-                                </div>
-                                <Divider style={{ marginTop: 10, marginBottom: 10 }} />
-                                <div name='accessible' style={{ textAlign: 'center' }}>
-                                    {module.isOk ?
-                                        'Accessible'
-                                        :
-                                        ("Accessible a partir du: " + module.dateAccess)
-                                    }
-                                </div>
-                            </div>
-                        </Col>
-                    ))}
-
                 </Row> */}
 
-                <Row style={{ backgroundColor: "rgba(36,172,242,0.3)", borderRadius: 5, margin: 20, marginTop: 30, padding: 20 }}>
-
-                    <Col>
-                        <div>
-                            <div style={{ fontWeight: 'bold', fontSize: 17 }}>Fonctionement de la formation:</div>
-                            <ol>
-                                <li style={{ margin: 5 }}><span style={{ fontWeight: 'bold' }}>Chapitres et Quiz:</span> Chaque module est divisé en plusieurs chapitres. À la fin de chaque chapitre, vous trouverez un quiz à compléter. Ces quiz vous permettront de vérifier vos connaissances et de renforcer votre compréhension des sujets abordés.</li>
-                                <li style={{ margin: 5 }}><span style={{ fontWeight: 'bold' }}>Progression Graduelle:</span> Les modules ne sont pas tous accessibles simultanément. Au début, seul le premier module est déverrouillé. Chaque semaine, un nouveau module sera accessible. Cette approche progressive vous permettra de suivre la formation de manière structurée et d’assimiler les informations étape par étape</li>
-                                <li style={{ margin: 5 }}><span style={{ fontWeight: 'bold' }}>Attestation de Réussite:</span> À la fin de la formation, si vous avez complété tous les chapitres et réussi les quiz, vous recevrez une attestation qui témoigne de votre engagement et de vos compétences nouvellement acquises.</li>
-                            </ol>
-                        </div>
-                    </Col>
-                </Row>
+                <div className="question-page">
+                    <div style={{ margin: '5px', fontWeight: 'blod', }}>Tableau de bord</div>
+                    {/* Navigation buttons */}
+                    <div className="navigation-buttons row">
+                        {navigationData.map((item, index) => (
+                            <Col key={index} style={{ margin: 10 }}>
+                                {/* Wrap entire content in a button */}
+                                <button
+                                    className="statItemDashbord"
+                                    style={{ backgroundColor: index % 2 === 0 ? '#FFEEE8' : '#EBEBFF' }} // Alternate background colors
+                                    onClick={() => navigate(item.link)}
+                                >
+                                    <div className='icnDashbord'></div>
+                                    <div className='texteStatDashbord'>
+                                        <span className='numberStatDashboard'>{item.title}</span>
+                                        <span className='texteStatDashboard'>80 Questions</span>
+                                    </div>
+                                </button>
+                            </Col>
+                        ))}
+                    </div>
+                    {/* Rest of your QuestionPage content */}
+                </div>
 
                 <Footer />
             </Container>

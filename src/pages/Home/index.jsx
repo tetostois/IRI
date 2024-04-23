@@ -50,7 +50,7 @@ const Home = () => {
 
             </div>
             {/* <img className='imageFille' src="/images/fille01.png" alt="une jeune ecoliere" /> */}
-            <div className='imageFille' style={{ backgroundImage: 'url(/images/fille01.png)' }}></div>
+            {/* <div className='imageFille' style={{ backgroundImage: 'url(/images/fille01.png)' }}></div> */}
 
 
             <footer className='footerHome' style={{ backgroundImage: 'url(/images/footerImage.png)' }} >

@@ -1,6 +1,35 @@
-.imgTransition {
+/* .imgTransition {
   background-image: url(/public/images/footerImage.png);
   display: flex;
   justify-content: center;
   padding-top: 10px;
+}
+
+.font {
+  background-color: rgba(255, 255, 255, 0.067);
+  color: back;
+} */
+
+.warning-message {
+  background-color: #ffecec;
+  border: 1px solid #f5a6a6;
+  border-radius: 5px;
+  padding: 50px;
+  margin: 20px auto;
+  text-align: center;
+}
+
+.warning-message p {
+  margin-bottom: 5px;
+}
+
+.buttons-container {
+  display: flex;
+  justify-content: space-between; /* Distributes buttons evenly */
+}
+
+.buttons-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr; /* Two equal-width columns */
+  justify-items: center; /* Centers buttons vertically */
 }

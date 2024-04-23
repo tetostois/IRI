@@ -29,20 +29,23 @@ export default function Header() {
                             <Link to={'/dashboard'} style={{ textDecorationLine: 'none', color: 'black' }} >dashbord </Link>
                         </span>
                         <span style={{ marginLeft: 10 }}>
-                            <Link to={'/course'} style={{ textDecorationLine: 'none', color: 'black' }} >course </Link>
+                            <Link to={'/connexion'} style={{ textDecorationLine: 'none', color: 'black' }} >connexion </Link>
                         </span>
+                        {/* <span style={{ marginLeft: 10 }}>
+                            <Link to={'/QuestionReponseChrono'} style={{ textDecorationLine: 'none', color: 'black' }} >questionReponseChrono </Link>
+                        </span> */}
                     </div>
                 }
             </div>
             <div style={{ marginRight: 20, zIndex: 2, display: 'flex', flexDirection: 'row', alignItems: 'center', gap: 5 }}>
-                {user ?
+                {/* {user ?
                     <div className='buttonAction'>
                         <Button variant='outlined' color='error' onClick={() => { setUser(null) }} >Deconnexion</Button>
                     </div>
                     :
                     <SignInSignUp signIn={false} />
 
-                }
+                } */}
                 <select
                     id="language-select"
                     value={language}
